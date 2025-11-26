@@ -69,3 +69,9 @@ This section links each R script file to the corresponding figure and statistica
 | :--- | :--- | :--- | :--- |
 | `location_scale_model.R`| **Figure S7** | **GLMM (Location-Scale)** | Analyzes the effects of Treatment and Rank on the **Mean** (location) and **Variance** (scale) of relative body temperature. |
 | `SEM.R` | **Figure 5** | **pSEM** | Piecewise Structural Equation Model testing the causal pathways among Treatment, Behavior (Conflict/Investment), and relative body temperature. |
+
+#### Note on Figure 5 (SEM path diagram)
+
+The numerical results underlying Figure 5 (standardized path coefficients, standard errors, and p-values) are fully reproducible from `SEM.R`. 
+
+However, the **published Figure 5 graphic itself was assembled manually in Adobe Illustrator**, using these numerical outputs (to improve visual clarity over default plotting functions). Therefore, there is no R script that reproduces the exact final layout of the Figure 5 panel, but all underlying statistics are reproducible from the provided code and data.
