@@ -6,8 +6,8 @@ library(ggplot2)    # For data visualization
 # --------------------------------------------------------------------
 # 2. Data Loading and Preparation
 # --------------------------------------------------------------------
-data_t <- read.csv("body_temp.csv")
-data_i <- read.csv("individual.csv")
+data_t <- read.csv("data/body_temp.csv")
+data_i <- read.csv("data/individual.csv")
 
 # Select only necessary columns from individual data (nm, gender)
 data_i <- data_i[, c("nm", "gender")]
@@ -23,31 +23,74 @@ data_m <- subset(data_t, data_t$treat == "maggot") # Blowfly group
 data_c <- subset(data_t, data_t$treat == "control") # Control group
 
 # --------------------------------------------------------------------
-# 3. Statistical Analysis
+# 3. Statistical analysis for Supplementary Tables S1 and S2
 # --------------------------------------------------------------------
 
-# 1. Split the data frames into a list based on the 'group' variable
-list_of_groups_maggot <- split(data_m, data_m$group)
+# Split dataset by group
 list_of_groups_control <- split(data_c, data_c$group)
+list_of_groups_maggot  <- split(data_m, data_m$group)
 
-# 2. Define a function to fit the GAM model and return the ANOVA result
-run_gam_and_anova <- function(data_subset) {
-  # Fit GAM Model: Relative body temperature (Tb.Tc) as a smooth function of time
-  # bs="cs" specifies a cubic regression spline
-  model <- gam(Tb.Tc ~ s(Time_Relative_sf, bs = "cs"), data = data_subset)
+# Function to fit GAM and extract the exact statistics for Table S1/S2
+run_gam_and_extract <- function(dat, group_name, treatment_label) {
   
-  # Return the ANOVA result to test the significance of the smooth term
-  return(anova(model))
+  # Fit model
+  m <- gam(Tb.Tc ~ s(Time_Relative_sf, bs = "cs"), data = dat)
+  
+  # Extract smooth-term table from summary()
+  s_tab <- summary(m)$s.table
+  smooth_row <- s_tab[1, , drop = FALSE]
+  
+  # Extract edf, F, p
+  edf_val <- as.numeric(smooth_row[, "edf"])
+  F_val   <- as.numeric(smooth_row[, "F"])
+  p_val   <- as.numeric(smooth_row[, "p-value"])
+  
+  # Format p exactly (never show 0)
+  # eps = minimal threshold; values smaller than eps displayed as "< 1e-16"
+  p_formatted <- format.pval(
+    p_val,
+    digits = 4,
+    eps    = 1e-16,     # scientific notation for extremely small p-values
+    scientific = TRUE
+  )
+  
+  # Build table row
+  data.frame(
+    Term      = "s(Time_Relative_sf)",
+    Treatment = treatment_label,
+    Group     = group_name,
+    edf       = round(edf_val, 3),
+    F         = signif(F_val, 4),
+    p         = p_formatted,
+    row.names = NULL
+  )
 }
 
-# 3. Apply the function to each data frame in the list using lapply()
-all_anova_results <- c(
-  lapply(list_of_groups_maggot, run_gam_and_anova),
-  lapply(list_of_groups_control, run_gam_and_anova)
+# ---- Build Table S1 (Control group) ------------------------------------------
+table_S1 <- bind_rows(
+  lapply(names(list_of_groups_control), function(g) {
+    run_gam_and_extract(
+      dat             = list_of_groups_control[[g]],
+      group_name      = g,
+      treatment_label = "Control"
+    )
+  })
 )
 
-# Print all results
-print(all_anova_results) 
+# ---- Build Table S2 (Blowfly treatment group) --------------------------------
+table_S2 <- bind_rows(
+  lapply(names(list_of_groups_maggot), function(g) {
+    run_gam_and_extract(
+      dat             = list_of_groups_maggot[[g]],
+      group_name      = g,
+      treatment_label = "Blowfly"
+    )
+  })
+)
+
+# Display for inspection
+table_S1
+table_S2
 
 # --------------------------------------------------------------------
 # 4. Visualization (Figure 2A & 2B)
@@ -105,5 +148,6 @@ figure_2B <- ggplot(data = data_m, aes(x = Time_Relative_sf / 3600, y = Tb.Tc, c
     labels = c("19:00", "21:30", "00:00", "02:30", "05:00") 
   ) +
   coord_cartesian(ylim = c(-0.5, 3), expand = TRUE)
+
 
 print(figure_2B)
