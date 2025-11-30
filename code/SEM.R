@@ -6,7 +6,7 @@ library(piecewiseSEM) # For fitting and analyzing piecewise Structural Equation 
 # 2. Data Loading and Preparation
 # --------------------------------------------------------------------
 
-data_i <- read.csv("individual.csv")
+data_i <- read.csv("data/individual.csv")
 
 # Convert the categorical 'treat' variable into a numeric dummy variable for SEM
 data_i$treat <- ifelse(data_i$treat == "control", 1, 2)
@@ -42,3 +42,4 @@ mod <- psem(
 summary(mod)
 
 # Note: The published Figure 5 diagram itself (arrows and boxes) was assembled manually in Adobe Illustrator using the numerical outputs from this script. Hence, there is no R code that reproduces the exact graphical layout of Figure 5, but all statistics are fully reproducible.
+
