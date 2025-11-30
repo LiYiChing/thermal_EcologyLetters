@@ -8,8 +8,8 @@ library(tidyr)      # For data reshaping (gather function)
 # 2. Data Loading and Preparation
 # --------------------------------------------------------------------
 
-data_b <- read.csv("behavior.csv")
-data_i <- read.csv("individual.csv")
+data_b <- read.csv("data/behavior.csv")
+data_i <- read.csv("data/individual.csv")
 
 # Select necessary columns from individual data and merge with behavior data
 data_i <- data_i[, c("nm", "treat", "gender", "mi_hier")]
@@ -104,4 +104,5 @@ plot_S6B <- ggplot(data = D_S6B, aes(x = time, y = conflict, group = member, col
   labs(x = "Time", y = "Total conflict time (s)") + 
   coord_cartesian(ylim = c(0, 12), expand = TRUE) +
   shared_theme_behav
+
 print(plot_S6B)
