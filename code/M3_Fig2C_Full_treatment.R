@@ -8,7 +8,7 @@ library(ggsignif)   # For adding significance bars to ggplot
 # --------------------------------------------------------------------
 
 # Read the full dataset (individual-level data)
-data_i <- read.csv("individual.csv")
+data_i <- read.csv("data/individual.csv")
 
 # --------------------------------------------------------------------
 # 3. Model Fitting (M3)
@@ -77,3 +77,4 @@ figure_2C <- ggplot(data = yv, aes(x = treat, y = fit, fill = treat)) +
 
 # Display the figure
 print(figure_2C)
+
