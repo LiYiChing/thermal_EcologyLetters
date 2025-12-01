@@ -12,6 +12,7 @@ The code provided here allows for the full reproduction of all core statistical 
 
 | File Name | Content |
 | :--- | :--- |
+| `Noldus_raw_data.xlsx` | **Raw Noldus Event**: Unprocessed behavioral and thermal time-series exported directly from Noldus, used to derive the processed datasets below. |
 | `body_temp.csv` | **Time-Series Data**: Detailed records of individual relative body temperature over time. |
 | `individual.csv` | **Individual-Level Data**: Summary data including body temperature, social rank, sex, treatment group (Control/Blowfly), and aggregated behavioral variables. |
 | `behavior.csv` | **Behavioral Time-Series Data**: Detailed time-series records of cooperative investment and conflict behavior across 10 time intervals. |
@@ -22,7 +23,13 @@ The code provided here allows for the full reproduction of all core statistical 
 Below we provide a full variable-level metadata table for all data files included in the repository.  
 For each dataset, we list the variable name, definition, and units.
 
-### **1. `body_temp.csv`**
+### **1. `Noldus_raw_data.xlsx`**
+
+| Variable | Description | Unit |
+|---------|--------------|------|
+| Date_Time_Absolute_dmy_hmsf | Absolute date–time of each replicate | DD-MM-YYYY hh:mm:ss.sss |
+
+### **2. `body_temp.csv`**
 
 | Variable | Description | Unit |
 |---------|--------------|------|
@@ -42,7 +49,7 @@ For each dataset, we list the variable name, definition, and units.
 |mark| The label of the beetle | the mark pattern |
 |nm| Records the unique identification number of the individual across all nests in the entire dataset | (nest number, mark)|
 
-### **2. `individual.csv`**
+### **3. `individual.csv`**
 
 | Variable | Description | Unit |
 |---------|--------------|------|
@@ -76,7 +83,7 @@ For each dataset, we list the variable name, definition, and units.
 |escape_invest|i_escape / i_invest | times/seconds|
 |Tc | The temperature of carcass |°C |
 
-### **3. `behavior.csv`**
+### **4. `behavior.csv`**
 
 | Variable | Description | Unit |
 |---------|--------------|------|
