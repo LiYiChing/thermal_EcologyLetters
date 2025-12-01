@@ -68,6 +68,7 @@ For each dataset, we list the variable name, definition, and units.
 |i_chase.num|The total count of 'chase' behaviors performed by the individual | times |
 |i_escape.num|The total count of 'escape' behaviors performed by the individual | times |
 |Tb | The body temperature of the beetle | °C |
+|max_temp_time| Time to reach maximum relative body temperature| hours|
 |conflict_invest| i_conflict / i_invest | times/seconds|
 |attack_invest|i_attack / i_invest | times/seconds|
 |wrestle_invest|i_wrestle / i_invest | times/seconds|
