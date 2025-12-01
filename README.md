@@ -156,8 +156,6 @@ This section links each R script file to the corresponding figure and statistica
 | :--- | :--- | :--- | :--- |
 | `Fig1_model.nb` | **Figure 1A, 1B, 1C, 1D** | Theoretical model | Implements the theoretical model of cooperative investment, conflict, and energetic cost. |
 
-
-
 ### 2. Thermal Physiology (LM & GAM)
 
 | Script Name | Figure and Table | Core Model | Key Analysis |
