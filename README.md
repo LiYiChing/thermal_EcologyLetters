@@ -150,7 +150,7 @@ This section links each R script file to the corresponding figure and statistica
 
 | Script Name | Figure and Table | Core Model | Key Analysis |
 | :--- | :--- | :--- | :--- |
-| `M6_M7_Fig4_cooperation.R` | **Figure 4A-4D** | **M6, M7** | Partial regression plots of relative body temperature vs. Investment and Conflict Index. |
+| `M6_M7_Fig4_behavior.R` | **Figure 4A-4D** | **M6, M7** | Partial regression plots of relative body temperature vs. Investment and Conflict Index. |
 | `M9_M10_Fig4E_4F_behavior.R`| **Figure 4E, 4F** | **M9, M10** | Total Cooperative Investment and Conflict Index vs. Treatment Group. |
 | `FigS5_S6_GAM_behavior.R` | **Figure S5, S6** | GAMs | Smooth trends of Cooperative Investment and Conflict behavior across 10 time intervals. |
 
